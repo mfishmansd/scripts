@@ -41,7 +41,7 @@ function Set-HubSiteTimezone {
     Write-Host "Timezone update for all sites complete." -ForegroundColor Yellow
 }
 
-# Example usage: Set-HubSiteTimezone -adminUrl "https://klarinet-admin.sharepoint.com" -hubSiteUrl "https://klarinet.sharepoint.com" -timeZoneId 13
+# Example usage: Set-HubSiteTimezone -adminUrl "https://tenantname-admin.sharepoint.com" -hubSiteUrl "https://tenantname.sharepoint.com" -timeZoneId 13
 
 
 function Get-HubSiteTimezone {
@@ -76,4 +76,4 @@ function Get-HubSiteTimezone {
     Write-Host "Timezone retrieval for all sites complete." -ForegroundColor Yellow
 }
 
-# Example usage: Get-HubSiteTimezone -adminUrl "https://klarinet-admin.sharepoint.com" -hubSiteUrl "https://klarinet.sharepoint.com"
+# Example usage: Get-HubSiteTimezone -adminUrl "https://tenantname-admin.sharepoint.com" -hubSiteUrl "https://tenantname.sharepoint.com"
