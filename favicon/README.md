@@ -78,7 +78,3 @@ After following these steps, your SharePoint tenant should display the new favic
 - Ensure the favicon URL is secure (`https`) and accessible to all users in the tenant.
 - Adhere to your organization's governance policies when deploying custom solutions.
 - Consult SharePoint developer documentation or seek assistance from a SharePoint expert if you encounter issues.
-
----
-
-Adjust these instructions as necessary to fit your specific SharePoint environment and governance policies.
