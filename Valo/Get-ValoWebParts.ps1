@@ -52,7 +52,7 @@ function Process-Site {
     Write-Host "Connected to $SiteURL" -ForegroundColor Cyan
 
     Write-Host "Processing Site $SiteURL" -ForegroundColor Cyan
-    $PagesLib = Get-PnPList -Identity "site pages"
+    $PagesLib = Get-PnPList -Identity "Site Pages"
     Write-Host "`tPages library retrieved" -ForegroundColor Yellow
 
     $Pages = Get-PnPListItem -List $PagesLib
