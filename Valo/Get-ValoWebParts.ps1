@@ -23,6 +23,9 @@ param (
     [Parameter(Mandatory=$true)]
     [string]$HubSiteURL,
 
+    [Parameter(Mandatory=$true)]
+    [string]$ClientId,
+
     [Parameter(Mandatory=$false)]
     [string]$ReportOutput = "C:\temp\Webparts-in-use.csv"
 )
@@ -32,6 +35,10 @@ Import-Module PnP.PowerShell
 Write-Host "Module Imported" -ForegroundColor Green
 
 [System.Collections.ArrayList]$ResultCollection = @()
+
+# Connect to the Hub Site to get associated sites
+Connect-PnPOnline -Url $HubSiteURL -ClientId $ClientId -Interactive
+Write-Host "Connected to Hub Site: $HubSiteURL" -ForegroundColor Cyan
 
 # Get all sites associated with the hub site
 $AssociatedSites = Get-PnPHubSiteChild -Identity $HubSiteURL
@@ -48,7 +55,7 @@ function Process-Site {
     )
 
     # Connect to the site
-    Connect-PnPOnline -Url $SiteURL -Interactive
+    Connect-PnPOnline -Url $SiteURL -Interactive -ClientId $ClientId 
     Write-Host "Connected to $SiteURL" -ForegroundColor Cyan
 
     Write-Host "Processing Site $SiteURL" -ForegroundColor Cyan
@@ -102,7 +109,7 @@ function Process-Site {
     $script:ProcessedSites++  # Increment the number of processed sites
 }
 # Connect to the Hub Site to get associated sites
-Connect-PnPOnline -Url $HubSiteURL -Interactive
+Connect-PnPOnline -Url $HubSiteURL -Interactive -ClientId $ClientId 
 
 # Process the hub site itself
 Process-Site -SiteURL $HubSiteURL -SiteNumber 1
