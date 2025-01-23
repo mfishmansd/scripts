@@ -15,7 +15,7 @@ The URL of the SharePoint hub site from which associated sites will be retrieved
 The User Principal Name (email address) of the user to be added as an admin.
 
 .EXAMPLE
-.\Add-UserAsAdminToHubSites.ps1 -AdminSiteURL "https://contoso-admin.sharepoint.com" -HubSiteURL "https://contoso.sharepoint.com/sites/hub" -UserPrincipalName "user@contoso.com"
+.\Add-UserAsAdminToHubSites.ps1 -AdminSiteURL "https://contoso-admin.sharepoint.com" -HubSiteURL "https://contoso.sharepoint.com/sites/hub" -UserPrincipalName "user@contoso.com"  -ClientId "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
 
 .NOTES
 Ensure the PnP.PowerShell module is installed and you have administrative permissions to add site collection administrators.
@@ -29,7 +29,10 @@ param (
     [string]$HubSiteURL,
 
     [Parameter(Mandatory=$true)]
-    [string]$UserPrincipalName
+    [string]$UserPrincipalName,
+
+    [Parameter(Mandatory=$true)]
+    [string]$ClientId
 )
 
 # Import the required module
@@ -37,7 +40,7 @@ Import-Module PnP.PowerShell
 Write-Host "Module Imported" -ForegroundColor Green
 
 # Connect to the SharePoint Admin Center
-Connect-PnPOnline -Url $AdminSiteURL -Interactive
+Connect-PnPOnline -Url $AdminSiteURL -Interactive -ClientId $ClientId
 Write-Host "Connected to SharePoint Admin Site" -ForegroundColor Cyan
 
 # Retrieve all sites associated with the specified hub site
@@ -52,7 +55,7 @@ function Add-UserAsAdmin {
     )
 
     # Connect to the site
-    Connect-PnPOnline -Url $SiteURL -Interactive
+    Connect-PnPOnline -Url $SiteURL -Interactive  -ClientId $ClientId
     Write-Host "Connected to $SiteURL" -ForegroundColor Cyan
 
     # Attempt to add the specified user as a site collection administrator
